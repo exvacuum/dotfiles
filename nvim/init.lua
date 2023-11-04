@@ -12,17 +12,14 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+local has_local_setup, local_setup = pcall(require, "local/init")
+
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
   use {
 	'goolord/alpha-nvim',
 	config = function() require('alpha').setup(require('plugin/alpha-theme').config) end
-  }
-
-  use {
-	'AlphaTechnolog/pywal.nvim',
-	config = function() require('pywal').setup() end
   }
 
   use {
@@ -53,6 +50,17 @@ require('packer').startup(function(use)
 		config = function() require('plugin/nvim-cmp') end
 	}
 
+
+	use { 
+		"nvim-treesitter/nvim-treesitter",
+		config = function() require('plugin/treesitter') end
+	}
+
+	use {
+		"nvim-lualine/lualine.nvim",
+		config = function() require('plugin/lualine') end
+	}
+	if has_local_setup then local_setup.packer(use) end
   if packer_bootstrap then
     require('packer').sync()
   end
@@ -61,12 +69,13 @@ end)
 -- Options
 vim.o.number = 1
 vim.o.relativenumber = 1
+vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 
 -- Keybinds
 local opts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap('n', '<leader>ff', '<cmd>Telescope file_browser<CR>', opts)
+vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser<CR>', opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -105,3 +114,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
+
+if has_local_setup then local_setup.setup(use) end
