@@ -84,6 +84,7 @@ local buttons = {
     val = {
         button("e", "  New file", "<cmd>ene <CR>"),
 	button("f", "󰝰  Open file", "<cmd>Telescope file_browser<CR>"),
+	button("w", "󰏖  Open workspace", "<cmd>Telescope workspaces<CR>"),
 	button("c", "󱁤  Open config", "<cmd>cd ~/.config/nvim<CR><cmd>Telescope file_browser<CR>"),
 	button("q", "󰩈  Quit", "<cmd>q<CR>")
     },

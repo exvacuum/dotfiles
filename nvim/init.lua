@@ -28,6 +28,11 @@ require('packer').startup(function(use)
 	}
 
 	use {
+		"nvim-telescope/telescope.nvim",
+		config = function() require('plugin/telescope') end
+	}
+
+	use {
 		"nvim-telescope/telescope-file-browser.nvim",
 		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" }
 	}
@@ -60,6 +65,17 @@ require('packer').startup(function(use)
 		"nvim-lualine/lualine.nvim",
 		config = function() require('plugin/lualine') end
 	}
+
+	use {
+	 	'akinsho/toggleterm.nvim',
+		config = function() require('plugin/toggleterm') end
+	}
+
+	use {
+		'natecraddock/workspaces.nvim',
+		config = function() require('workspaces').setup() end
+	}
+
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
 		require('packer').sync()
@@ -75,8 +91,9 @@ vim.g.maplocalleader = ','
 
 -- Keybinds
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser<CR>', opts)
+vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser path=%:p:h<CR>', opts)
 vim.keymap.set('n', '<leader>fs', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
+vim.keymap.set('n', '<leader>vs', '<cmd>vs Telescope file_browser path=%:p:h<CR>', opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
