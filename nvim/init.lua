@@ -76,6 +76,18 @@ require('packer').startup(function(use)
 		config = function() require('workspaces').setup() end
 	}
 
+	use {
+		'barrett-ruth/live-server.nvim',
+		config = function() require('live-server').setup() end
+	}
+
+	use {
+		'ray-x/lsp_signature.nvim',
+		config = function ()
+			require('lsp_signature').setup();
+		end
+	}
+
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
 		require('packer').sync()

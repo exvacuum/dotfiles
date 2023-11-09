@@ -44,3 +44,4 @@ require'lspconfig'.lua_ls.setup {
     return true
   end
 }
+require'lspconfig'.tsserver.setup{}
