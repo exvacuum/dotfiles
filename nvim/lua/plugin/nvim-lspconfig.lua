@@ -45,3 +45,4 @@ require'lspconfig'.lua_ls.setup {
   end
 }
 require'lspconfig'.tsserver.setup{}
+require'lspconfig'.pyright.setup{}
