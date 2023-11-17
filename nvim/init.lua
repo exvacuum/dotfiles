@@ -41,7 +41,10 @@ require('packer').startup(function(use)
 		config = function() require('plugin/nvim-lspconfig') end
 	}
 
-	use 'L3MON4D3/LuaSnip'
+	use {
+		'L3MON4D3/LuaSnip',
+		config = function () require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/LuaSnip/"}) end
+	}
 
 	use {
 		'hrsh7th/nvim-cmp',
@@ -49,6 +52,7 @@ require('packer').startup(function(use)
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-buffer',
 			'hrsh7th/cmp-path',
+  			'micangl/cmp-vimtex',
 			'hrsh7th/cmp-cmdline',
 			'saadparwaiz1/cmp_luasnip',
 		},
@@ -88,6 +92,11 @@ require('packer').startup(function(use)
 		end
 	}
 
+	use {
+		'lervag/vimtex',
+		config = function () require('plugin/vimtex') end
+	}
+
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
 		require('packer').sync()
@@ -100,6 +109,8 @@ vim.o.relativenumber = 1
 vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
+vim.api.nvim_command('filetype plugin indent on')
+vim.api.nvim_command('syntax enable')
 
 -- Keybinds
 local opts = { noremap = true, silent = true }
@@ -119,8 +130,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup('UserLspConfig', {}),
 	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
