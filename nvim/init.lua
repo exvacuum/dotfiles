@@ -109,7 +109,6 @@ vim.o.relativenumber = 1
 vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
-vim.api.nvim_command('filetype plugin indent on')
 vim.api.nvim_command('syntax enable')
 
 -- Keybinds

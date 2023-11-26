@@ -15,6 +15,7 @@
     },
   }
 require'lspconfig'.lua_ls.setup {
+    capabilities = capabilities,
   on_init = function(client)
     local path = client.workspace_folders[1].name
     if not vim.loop.fs_stat(path..'/.luarc.json') and not vim.loop.fs_stat(path..'/.luarc.jsonc') then
@@ -44,5 +45,13 @@ require'lspconfig'.lua_ls.setup {
     return true
   end
 }
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.pyright.setup{}
+require'lspconfig'.tsserver.setup{
+    capabilities = capabilities,
+}
+require'lspconfig'.pyright.setup{
+    capabilities = capabilities,
+}
+require'lspconfig'.omnisharp.setup{
+    capabilities = capabilities,
+    cmd = { "/usr/bin/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
+}
