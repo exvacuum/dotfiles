@@ -86,6 +86,10 @@ local buttons = {
 	button("f", "󰝰  Open file", "<cmd>Telescope file_browser<CR>"),
 	button("w", "󰏖  Open workspace", "<cmd>Telescope workspaces<CR>"),
 	button("c", "󱁤  Open config", "<cmd>cd ~/.config/nvim<CR><cmd>Telescope file_browser<CR>"),
+	button("n", "  Create note", "<cmd>Telekasten new_note<CR>"),
+	button("z", "  Find note", "<cmd>Telekasten find_notes<CR>"),
+	button("v", "󱉼  Switch vault", "<cmd>Telekasten switch_vault<CR>"),
+	button("k", "  View kanban", "<cmd>KanbanOpen telescope<CR>"),
 	button("q", "󰩈  Quit", "<cmd>q<CR>")
     },
     opts = {

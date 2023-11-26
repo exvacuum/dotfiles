@@ -1,4 +1,3 @@
--- Plugins
 local ensure_packer = function()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
@@ -97,6 +96,16 @@ require('packer').startup(function(use)
 		config = function () require('plugin/vimtex') end
 	}
 
+	use {
+		'renerocksai/telekasten.nvim',
+		config = function () require('plugin/telekasten') end
+	}
+
+	use {
+		'arakkkkk/kanban.nvim',
+		config = function () require('plugin/kanban') end
+	}
+
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
 		require('packer').sync()
@@ -109,13 +118,15 @@ vim.o.relativenumber = 1
 vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
+vim.o.mousemodel = 'extend'
 vim.api.nvim_command('syntax enable')
 
 -- Keybinds
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser path=%:p:h<CR>', opts)
 vim.keymap.set('n', '<leader>fs', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
-vim.keymap.set('n', '<leader>vs', '<cmd>vs Telescope file_browser path=%:p:h<CR>', opts)
+vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR><cmd>Telescope file_browser path=%:p:h<CR>', opts)
+vim.keymap.set('n', '<leader>a', '<cmd>Alpha<CR>', opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
