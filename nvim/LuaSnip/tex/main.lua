@@ -11,7 +11,9 @@ return {
 		{
 			t({
 				"\\documentclass[titlepage, a4paper, 11pt]{article}",
+				"\\usepackage[margin=1in, headheight=1cm]{geometry}",
 				"\\usepackage[style=apa, backend=biber]{biblatex}",
+				"\\usepackage{fancyhdr}",
 				"\\addbibresource{bibliography.bib}",
 				"\\let\\oldsection\\section",
 				"\\renewcommand\\section{\\clearpage\\oldsection}",
@@ -19,8 +21,15 @@ return {
 				"\\begin{document}"
 			}),
 			t({"", "\\title{"}), i(1, "title"), t("}"),
-			t({"", "\\author{Silas Bartha\\\\Software Engineering Technology, Conestoga College\\\\Professor "}), i(2, "professor"), t("\\\\SENG3020}"),
-			t({"", "\\date{"}), p(os.date, "%D"), t({"}", "\\maketitle"}),
+			t({"", "\\author{Silas Bartha\\\\Software Engineering Technology, Conestoga College\\\\Professor "}), i(2, "professor"),
+			t("\\\\"), i(3,"course"),  t("}"),
+			t({"", "\\date{\\today}", "\\maketitle"}),
+			t({
+				"",
+				"\\pagestyle{fancy}",
+				"\\fancyhead{}",
+				"\\fancyhead[R]{"
+			}), r(1), t("}"),
 			t({
 				"",
 				"",
@@ -30,7 +39,7 @@ return {
 		}
 	),
 	ls.snippet(
-		{trig = "environment" },
+		{trig = "beg" },
 		{
 			t("\\begin{"), i(1, "equation"), t("}"),
 			t({"", ""}), i(2),
