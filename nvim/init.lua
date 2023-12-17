@@ -106,6 +106,30 @@ require('packer').startup(function(use)
 		config = function () require('plugin/kanban') end
 	}
 
+	use {
+		'folke/todo-comments.nvim',
+		config = function ()
+			require('plugin/todo-comments')
+		end
+	}
+
+	use {
+		'folke/zen-mode.nvim',
+		config = function ()
+			require('zen-mode').setup({
+			})
+		end
+	}
+
+	use {
+		'folke/twilight.nvim',
+		config = function()
+			require('zen-mode').setup({
+			})
+		end
+	}
+
+
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
 		require('packer').sync()
@@ -124,9 +148,15 @@ vim.api.nvim_command('syntax enable')
 -- Keybinds
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<leader>ff', '<cmd>Telescope file_browser path=%:p:h<CR>', opts)
+vim.keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<CR>', opts)
+vim.keymap.set('n', '<leader>fe', '<cmd>Telescope find_files<CR>', opts)
+vim.keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', opts)
 vim.keymap.set('n', '<leader>fs', '<cmd>Telescope lsp_workspace_symbols<CR>', opts)
 vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR><cmd>Telescope file_browser path=%:p:h<CR>', opts)
 vim.keymap.set('n', '<leader>a', '<cmd>Alpha<CR>', opts)
+vim.keymap.set('n', '<leader>ll', '<cmd>Twilight<CR>', opts)
+vim.keymap.set('n', '<leader>za', require('zen-mode').toggle, opts)
+vim.keymap.set('n', '<leader>gp', '<cmd>b#<CR>', opts)
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
