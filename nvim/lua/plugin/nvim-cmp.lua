@@ -53,6 +53,7 @@ cmp.setup({
       { name = 'nvim_lsp' }
     }, {
       { name = 'buffer' },
+      { name = 'path' }
     })
   })
 
@@ -63,6 +64,15 @@ cmp.setup({
     }, {
       { name = 'buffer' },
     })
+  })
+
+  cmp.setup.filetype('markdown', {
+	sources = cmp.config.sources({
+      		{ name = 'luasnip' },
+		{ name = 'mkdnflow' },
+		{ name = 'buffer' },	
+      		{ name = 'path' }
+	})
   })
 
   cmp.setup.cmdline({ '/', '?' }, {

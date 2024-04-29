@@ -15,6 +15,7 @@ local has_local_setup, local_setup = pcall(require, "local/init")
 
 require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
+	use 'nvim-lua/plenary.nvim'
 
 	use {
 		'goolord/alpha-nvim',
@@ -124,11 +125,22 @@ require('packer').startup(function(use)
 	use {
 		'folke/twilight.nvim',
 		config = function()
-			require('zen-mode').setup({
+			require('twilight').setup({
 			})
 		end
 	}
 
+	use {
+		'jakewvincent/mkdnflow.nvim',
+		config = function()
+			require('mkdnflow').setup({})
+		end
+	}
+
+	use {
+		'iamcco/markdown-preview.nvim',
+		run = function() vim.fn["mkdp#util#install"]() end,
+	}
 
 	if has_local_setup then local_setup.packer(use) end
 	if packer_bootstrap then
@@ -143,7 +155,13 @@ vim.o.clipboard = "unnamedplus"
 vim.g.mapleader = ','
 vim.g.maplocalleader = ','
 vim.o.mousemodel = 'extend'
+vim.wo.conceallevel = 2
 vim.api.nvim_command('syntax enable')
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = 1
+vim.o.smartindent = 1
+vim.o.foldmethod = 'marker'
 
 -- Keybinds
 local opts = { noremap = true, silent = true }
@@ -193,5 +211,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		end, keybind_opts)
 	end,
 })
+
+vim.filetype.add({ extension = { wgsl = 'wgsl', vert = 'glsl' } }) 
 
 if has_local_setup then local_setup.setup() end

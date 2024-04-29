@@ -55,3 +55,9 @@ require'lspconfig'.omnisharp.setup{
     capabilities = capabilities,
     cmd = { "/usr/bin/OmniSharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) }
 }
+require'lspconfig'.ccls.setup{
+    capabilities = capabilities,
+}
+require'lspconfig'.glsl_analyzer.setup{
+    capabilities = capabilities,
+}
